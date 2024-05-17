@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Pry_ventas_ds505.Models.Cliente>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1><i class="fas fa-users"></i> Listado De clientes </h1>
+<hr />
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <a class="btn btn-success" asp-controller="Cliente" asp-action="Create">
+                <i class="fas fa-plus"></i> Agregar Cliente
+            </a>
+
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayNameFor(per => per.codigo_cliente)</td>
+                        <td>@Html.DisplayNameFor(per => per.nombre)</td>
+                        <td>@Html.DisplayNameFor(per => per.ap_paterno)</td>
+                        <td>@Html.DisplayNameFor(per => per.ap_materno)</td>                      
+                        <td>@Html.DisplayNameFor(per => per.fecha_nacimiento)</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reg in Model)
+                    {
+                        <tr>
+                            <td>@reg.codigo_cliente</td>
+                            <td>@reg.nombre</td>
+                            <td>@reg.ap_paterno</td>
+                            <td>@reg.ap_materno</td>                            
+                            <td>@reg.fecha_nacimiento</td>
+                            <td>
+                                <a asp-controller="Personal" asp-action="Edit"
+                                   asp-route-id="@reg.codigo_cliente"
+                                   class="btn btn-outline-warning btn-sm"><i class="fas fa-trash-alt"></i>Editar</a>
+
+                                <a asp-controller="Personal" asp-action="Delete"
+                                   asp-route-id="@reg.codigo_cliente"
+                                   class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i>Borrar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No existen registros</p>
+        }
+    </div>
+
+</div>
+
+
